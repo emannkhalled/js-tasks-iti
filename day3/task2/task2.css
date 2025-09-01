@@ -1,0 +1,27 @@
+
+  body {
+    background: #b5889a; 
+    display: flex;
+    align-items: center;
+    padding-top: 250px;
+    flex-direction: column;
+  }
+
+#txt,#txt1 {
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border: 2px solid #ff99c8;
+    border-radius: 20px;
+    width: 250px;
+ 
+  }
+
+  button {
+    padding: 12px 25px;
+    background: #ff66b3;
+   border: 2px solid #ff99c8;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+  
+  }

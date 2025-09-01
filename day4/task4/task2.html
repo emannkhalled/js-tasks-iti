@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Validation </title>
+  <style>
+    body {
+      background: #f0f0f5;
+    }
+
+    .parent {
+      width: 350px;
+      padding: 100px;
+      background: white;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .error {
+      color: rgb(169, 54, 54);
+      margin-top: 3px;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      color: white;
+      background: green;
+      border-radius: 8px;
+      margin: 5px;
+    }
+
+    .reset {
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="parent">
+    <h2>Validation Form</h2>
+    <form id="f">
+      <label>Name</label>
+      <input type="text" id="name">
+      <div id="nameE" class="error"></div>
+
+      <label>Password</label>
+      <input type="password" id="pass">
+      <div id="passE" class="error"></div>
+
+      <label>Email</label>
+      <input type="text" id="email">
+      <div id="emailE" class="error"></div>
+
+      <label>Country</label>
+      <select id="country">
+        <option value="">-- Select --</option>
+        <option>Egypt</option>
+        <option>USA</option>
+      </select>
+      <div id="countryE" class="error"></div>
+
+      <div class="buttons">
+        <button type="button" onclick="doValidate()">Submit</button>
+        <button type="reset" class="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+   
+    var nameInput = document.getElementById("name");
+    var passInput = document.getElementById("pass");
+    var emailInput = document.getElementById("email");
+    var countryInput = document.getElementById("country");
+
+    var nameE = document.getElementById("nameE");
+    var passE = document.getElementById("passE");
+    var emailE = document.getElementById("emailE");
+    var countryE = document.getElementById("countryE");
+
+    
+    nameInput.oninput = function () {
+      if (nameInput.value.length < 4) {
+        nameE.innerHTML = "name must be > 3 letters";
+      } else {
+        nameE.innerHTML = "";
+      }
+    };
+
+    passInput.oninput = function () {
+      if (passInput.value.length < 6) {
+        passE.innerHTML = "Password must be > 6 letters";
+      } else {
+        passE.innerHTML = "";
+      }
+    };
+
+    emailInput.oninput = function () {
+      if (emailInput.value.indexOf("@") == -1) {
+        emailE.innerHTML = "Email must contain @";
+      } else {
+        emailE.innerHTML = "";
+      }
+    };
+
+    countryInput.onchange = function () {
+      if (countryInput.value == "") {
+        countryE.innerHTML = "enter ur country";
+      } else {
+        countryE.innerHTML = "";
+      }
+    };
+
+    function doValidate() {
+      if (nameE.innerHTML === "" &&
+        passE.innerHTML === "" &&
+        emailE.innerHTML === "" &&
+        countryE.innerHTML === "" &&
+        nameInput.value &&
+        passInput.value &&
+        emailInput.value &&
+        countryInput.value) {
+
+        console.log("successfully");
+        document.getElementById("f").reset();
+      } 
+    }
+  </script>
+
+</body>
+</html>

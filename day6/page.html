@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Users Manager</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #ffe6f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d63384;
+      margin-top: 20px;
+    }
+
+    .controls {
+      width: 80%;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      background: #ff66b2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #ff3399;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: #fff0f5;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      border: 1px solid #ff99cc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #ff66b2;
+      color: white;
+    }
+
+    .actions a {
+      margin: 0 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .actions a.edit {
+      color: #ff99cc;
+    }
+
+    .actions a.delete {
+      color: #ff3399;
+    }
+
+    #addForm,
+    #editForm {
+      display: none;
+      background: #fff0f5;
+      width: 400px;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+    }
+
+    #addForm input,
+    #editForm input {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
+      padding: 8px;
+      border: 1px solid #ff99cc;
+      border-radius: 5px;
+    }
+
+    #addForm h3,
+    #editForm h3 {
+      color: #d63384;
+      text-align: center;
+    }
+
+    .user-name {
+      cursor: pointer;
+      color: #d63384;
+      font-weight: bold;
+    }
+
+    .user-name:hover {
+      text-decoration: underline;
+    }
+
+    .selected {
+      background-color: #ffb3d9 !important;
+    }
+
+    #searchInput {
+      width: 50%;
+      padding: 8px;
+      border: 1px solid #ff99cc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Users Manager</h2>
+
+  <div class="controls">
+    <button id="loadUsersBtn">Load Users</button>
+    <button id="showAddBtn">Add User +</button>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search users...">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="userBody"></tbody>
+  </table>
+
+  <div id="addForm">
+    <h3>New User</h3>
+    <form id="addUserForm">
+      <input type="text" id="addFullName" placeholder="Full Name" required>
+      <input type="text" id="addUsername" placeholder="Username" required>
+      <input type="text" id="addRole" placeholder="Role" required>
+      <input type="text" id="addDepartment" placeholder="Department" required>
+      <button type="submit">Save</button>
+      <button type="button" onclick="cancelAdd()">Cancel</button>
+    </form>
+  </div>
+
+
+  <div id="editForm">
+    <h3>Edit User</h3>
+    <form id="editUserForm">
+      <input type="text" id="editFullName" placeholder="Full Name" required>
+      <input type="text" id="editUsername" placeholder="Username" required>
+      <input type="text" id="editRole" placeholder="Role" required>
+      <input type="text" id="editDepartment" placeholder="Department" required>
+      <button type="submit">Update</button>
+      <button type="button" onclick="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+
+  <script src="page.js"></script>
+</body>
+
+</html>

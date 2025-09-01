@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Alert Box Example</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 20px;
+      border:1px solid;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .b1{
+      background-color: green;
+    }
+
+    .error-btn {
+      background-color: red;
+    }
+
+    .alert-box {
+      width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #ccc;
+      display: none;
+    }
+
+    .success {
+      background: #f1f1f1;
+      color: green;
+    }
+
+    .error {
+      background: #f1f1f1;
+      color: red;
+    }
+
+    .alert-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .alert-msg {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="b1" onclick="doSuccess()">Success Alert</button>
+  <button class="error-btn" onclick="doError()">Error Alert</button>
+
+  <div id="alertBox" class="alert-box">
+    <div id="alertTitle" class="alert-title"></div>
+    <div id="alertMsg" class="alert-msg"></div>
+  </div>
+
+  <script>
+    function doSuccess() {
+      var box = document.getElementById("alertBox");
+      box.style.display = "block";
+      box.className = "alert-box success";
+
+      document.getElementById("alertTitle").innerHTML = "Success";
+      document.getElementById("alertMsg").innerHTML = "This is a Success Message";
+    }
+
+    function doError() {
+      var box = document.getElementById("alertBox");
+      box.style.display = "block";
+      box.className = "alert-box error";
+
+      document.getElementById("alertTitle").innerHTML = "Error";
+      document.getElementById("alertMsg").innerHTML = " Error Message";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f5; }
+    .parent { width: 450px; padding: 20px; margin: 50px auto; background: white; border-radius: 10px; }
+    h2 { text-align: center; color: #444; }
+    label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
+    input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 10px; }
+    .error { color: rgb(169, 54, 54); margin-top: 3px; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background: #eee; }
+    button { padding: 8px 15px; color: white; background: green; border-radius: 8px; border: none; cursor: pointer; }
+    .delete-btn { background: red; }
+  </style>
+</head>
+<body>
+
+  <div class="parent">
+    <h2>Students Form</h2>
+
+    <label>ID</label>
+    <input type="text" id="id" oninput="validateId()">
+    <div id="idE" class="error"></div>
+
+    <label>Name</label>
+    <input type="text" id="name" oninput="validateName()">
+    <div id="nameE" class="error"></div>
+
+    <label>Age</label>
+    <input type="text" id="age" oninput="validateAge()">
+    <div id="ageE" class="error"></div>
+
+    <div style="text-align:center; margin-top:15px;">
+      <button onclick="add()">Add Student</button>
+    </div>
+
+    <table id="t4">
+      <tr>
+        <th>ID</th><th>Name</th><th>Age</th><th>Action</th>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    var idInput = document.getElementById("id");
+    var nameInput = document.getElementById("name");
+    var ageInput = document.getElementById("age");
+    var table = document.getElementById("t4");
+
+    var idE = document.getElementById("idE");
+    var nameE = document.getElementById("nameE");
+    var ageE = document.getElementById("ageE");
+
+    function validateId() {
+      var id = idInput.value;
+      if (id === "") {
+        idE.innerHTML = "id required";
+        return false;
+      } else if (isNaN(id)) {
+        idE.innerHTML = "id must be a number";
+        return false;
+      } else {
+        idE.innerHTML = "";
+        return true;
+      }
+    }
+
+    function validateName() {
+      var name = nameInput.value;
+      if (name.length < 3) {
+        nameE.innerHTML = "name must be > 3 letters";
+        return false;
+      } else {
+        nameE.innerHTML = "";
+        return true;
+      }
+    }
+
+    function validateAge() {
+      var age = ageInput.value;
+      if (age === "") {
+        ageE.innerHTML = "age required";
+        return false;
+      } else if (isNaN(age)) {
+        ageE.innerHTML = "age must be a number";
+        return false;
+      } else if (Number(age) <= 10) {
+        ageE.innerHTML = "age must > 10";
+        return false;
+      } else {
+        ageE.innerHTML = "";
+        return true;
+      }
+    }
+
+    function add() {
+      var validId = validateId();
+      var validName = validateName();
+      var validAge = validateAge();
+
+      if (!(validId && validName && validAge)) return;
+
+      table.innerHTML +=
+        "<tr>" +
+          "<td>" + idInput.value + "</td>" +
+          "<td>" + nameInput.value + "</td>" +
+          "<td>" + ageInput.value + "</td>" +
+          "<td><button class='delete-btn' onclick='dodelete(this)'>Delete</button></td>" +
+        "</tr>";
+
+      idInput.value = "";
+      nameInput.value = "";
+      ageInput.value = "";
+    }
+
+    // Delete
+    function dodelete(btn) {
+      var row = btn.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
+
+  </script>
+
+</body>
+</html>

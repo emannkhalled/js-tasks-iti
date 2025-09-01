@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>task2</title>
+</head>
+<body>
+  <h2>C1&C2</h2>
+
+  <script>
+  
+    function c1func(p1, p2) {
+      try{
+
+      
+      if (arguments.length !== 2) {
+        throw new Error("Function must be accept only 2 parameters.");
+      }
+
+      if (p1 === null || p2 == null || String(p1)== "" || String(p2) == "" ||
+          isNaN(p1) || isNaN(p2)) {
+        throw new Error(" parameters must  numbers.");
+      }
+
+      var n1 = Number(p1);
+      var n2 = Number(p2);
+      return "Parameters received: " + n1 + " and " + n2;
+          } catch (e) {
+      alert("C1 Error: " + e.message);
+      console.error("C1 Error:", e.message);
+    }
+
+    }
+
+
+
+    function addNumbers() {
+      
+      if (arguments.length == 0) {
+        throw new Error("Function must be called with at least one parameter.");
+      }
+
+      var sum = 0;
+      for (var i = 0; i < arguments.length; i++) {
+        var v = arguments[i];
+
+        if ( isNaN(v)) {
+          throw new Error("paramter must be valid number.");
+        }
+
+        sum += Number(v);
+      }
+      return sum;
+    }
+
+    try {
+      var count = prompt("C2: How many numbers added ?");
+      if (count === null || String(count) == "" || isNaN(count)) {
+        throw new Error("Invalid count value.");
+      }
+
+      count = Number(count);
+      if (count <= 0 || Math.floor(count) !== count) {
+        throw new Error("Count must be a positive number.");
+      }
+
+      var nums = [];
+      for (var i = 0; i < count; i++) {
+        var val = prompt("Enter number " + (i + 1) + ":");
+        nums.push(val);
+      }
+
+      var resultC2 = addNumbers.apply(null, nums);
+      alert("C2: The sum is " + resultC2);
+      console.log("C2 Sum Result:", resultC2);
+    } catch (e) {
+      alert("C2 Error: " + e.message);
+      console.error("C2 Error:", e.message);
+    }
+  </script>
+</body>
+</html>

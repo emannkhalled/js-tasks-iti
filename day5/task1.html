@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Light</title>
+  <style>
+    body {
+      background: #662e44;
+      text-align: center;
+      padding: 200px;
+    }
+
+    .c {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 30px;
+      background: grey;
+      border: 2px solid black;
+      transition: background 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <div id="c1" class="c"></div>
+    <div id="c2" class="c"></div>
+    <div id="c3" class="c"></div>
+  </div>
+
+  <script>
+    var circles = document.getElementsByClassName("c");
+    var interval; 
+
+    
+    function colors() {
+      for (var j = 0; j < circles.length; j++) {
+        circles[j].style.background = "grey";
+      }
+    }
+
+    for (var i = 0; i < circles.length; i++) {
+      (function(index) {
+        circles[index].onmouseenter = function() {
+          clearInterval(interval); 
+          colors();
+          if (index == 0) {
+            circles[index].style.background = "red";
+          } else if (index == 1) {
+            circles[index].style.background = "yellow";
+          } else if (index == 2) {
+            circles[index].style.background = "green";
+          }
+        };
+
+        circles[index].onmouseleave = function() {
+          startInterval();
+        };
+      })(i);
+    }
+
+    function startInterval() {
+      var current = 0;
+      clearInterval(interval); 
+      interval = setInterval(function() {
+        colors();
+        if (current == 0) {
+          circles[0].style.background = "red";
+        } else if (current == 1) {
+          circles[1].style.background = "yellow";
+        } else if (current == 2) {
+          circles[2].style.background = "green";
+        }
+        current++;
+        if (current > 2) {
+          current = 0;
+        }
+      }, 1000); 
+    }
+
+
+    startInterval();
+  </script>
+
+</body>
+</html>

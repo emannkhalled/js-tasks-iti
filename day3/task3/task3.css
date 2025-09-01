@@ -1,0 +1,27 @@
+body {
+  background: #662e44;
+  text-align: center;
+  padding: 200px;
+}
+
+#txt {
+    width: 200px;
+ border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  
+}
+
+.c {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 30px;
+  background: grey;
+  border: 1px solid black;
+}
+
+.colored {
+  background: yellow;
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Register Page</title>
+  <style>
+    body {
+      background: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .parent {
+      background: #fff;
+      padding: 50px 70px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+      display: none;
+    }
+    .gender-selection {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px;
+    }
+    .gender-selection input {
+      display: none;
+    }
+    .gender-selection label img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .gender-selection input:checked + img {
+      border-color: #007bff;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <h2>Register</h2>
+    <form id="registerForm">
+      <label>Enter your name:</label>
+      <input type="text" id="name">
+      <div id="nameError" class="error">Please enter your name.</div>
+
+      <label>Enter your age:</label>
+      <input type="number" id="age">
+      <div id="ageError" class="error">Please enter a valid age.</div>
+
+      <label>Select your Gender:</label>
+      <div class="gender-selection">
+        <label>
+          <input type="radio" name="gender" value="male">
+          <img src="https://tse1.mm.bing.net/th/id/OIP.s8kms72P3ihc5V-yr2SH8QHaEK?pid=Api&P=0&h=220" alt="Male">
+        </label>
+        <label>
+          <input type="radio" name="gender" value="female">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.5s07y6Hz9tstgXQTTz8V2wHaE8?pid=Api&P=0&h=220" alt="Female">
+        </label>
+      </div>
+      <div id="genderError" class="error">Please select your gender.</div>
+
+      <label>Select your favorite color:</label>
+      <select id="color">
+        <option value="">--Choose--</option>
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+        <option value="Yellow">Yellow</option>
+      </select>
+      <div id="colorError" class="error">Please select your favorite color.</div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    
+    var form = document.getElementById("registerForm");
+    var nameInput = document.getElementById("name");
+    var ageInput = document.getElementById("age");
+    var genderInputs = document.getElementsByName("gender");
+    var colorSelect = document.getElementById("color");
+
+    var nameError = document.getElementById("nameError");
+    var ageError = document.getElementById("ageError");
+    var genderError = document.getElementById("genderError");
+    var colorError = document.getElementById("colorError");
+
+    nameInput.oninput = function() {
+      if (nameInput.value !== "") {
+        nameError.style.display = "none";
+      }
+    };
+
+    
+    ageInput.oninput = function() {
+      if (ageInput.value !== "" && parseInt(ageInput.value) > 0) {
+        ageError.style.display = "none";
+      }
+    };
+
+
+    colorSelect.onchange = function() {
+      if (colorSelect.value !== "") {
+        colorError.style.display = "none";
+      }
+    };
+
+ 
+    form.onsubmit = function(e) {
+      e.preventDefault();
+
+      var name = nameInput.value;
+      var age = ageInput.value;
+      var gender = "";
+      for (var i = 0; i < genderInputs.length; i++) {
+        if (genderInputs[i].checked) {
+          gender = genderInputs[i].value;
+          break;
+        }
+      }
+      var color = colorSelect.value;
+
+      var valid = true;
+
+      if (name == "") {
+        nameError.style.display = "block";
+        valid = false;
+      }
+      if (age == "" || Number(age) <= 0) {
+        ageError.style.display = "block";
+        valid = false;
+      }
+      if (gender == "") {
+        genderError.style.display = "block";
+        valid = false;
+      } else {
+        genderError.style.display = "none";
+      }
+      if (color == "") {
+        colorError.style.display = "block";
+        valid = false;
+      }
+
+      if (!valid) {
+        return;
+      }
+document.cookie = "name=" + name + "; path=/";
+document.cookie = "age=" + age + "; path=/";
+document.cookie = "gender=" + gender + "; path=/";
+document.cookie = "color=" + color + "; path=/";
+
+    
+      window.location.href = "registere.html";
+    };
+  </script>
+</body>
+</html>

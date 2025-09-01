@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Profile</title>
+<style>
+body {
+    font-family: Arial;
+    background: #ffe6f0;
+    text-align: center;
+    padding-top: 50px;
+    margin: 0;
+}
+.container {
+    background: #fff0f5;
+    display: inline-block;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255,0,128,0.3);
+}
+img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+h2 {
+    color: #d63384;
+    margin-bottom: 15px;
+}
+p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #ff66b2;
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background: #ff3399;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+    <h2 id="fullName"></h2>
+    <p>Username: <span id="username"></span></p>
+    <p>Role: <span id="role"></span></p>
+    <p>Department: <span id="department"></span></p>
+    
+</div>
+
+<script>
+// دالة لقراءة الكوكيز
+function getCookie(name){
+    let cookies = document.cookie.split("; ");
+    for(let c of cookies){
+        let [k,v] = c.split("=");
+        if(k === name) return decodeURIComponent(v);
+    }
+    return "";
+}
+
+// وضع البيانات في الصفحة
+document.getElementById("fullName").innerText = getCookie("user_fullName");
+document.getElementById("username").innerText = getCookie("user_username");
+document.getElementById("role").innerText = getCookie("user_role");
+document.getElementById("department").innerText = getCookie("user_department");
+document.getElementById("userImg").src = getCookie("user_img") || "https://via.placeholder.com/120";
+
+
+</script>
+
+</body>
+</html>

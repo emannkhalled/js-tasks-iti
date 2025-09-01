@@ -1,0 +1,43 @@
+
+        body {
+           
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .parent {
+            background-color: #ffffff;
+            width: 320px;
+            margin: 0 auto;
+            padding: 20px;
+             border: 1px solid #261b1b;
+        }
+
+       
+
+        #txt,#max,#min {
+            border-radius: 10%;
+            width:200px;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #261b1b;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px;
+            color: #0d0d0d;
+            font-size: 18px;
+        }
+
+        button {
+            border-radius: 10%;
+            width: 150px;
+            background-color: #33bacc; 
+        }
+
+        #max, #min {
+            background-color: #eee;
+            border: bold #999;
+        }
