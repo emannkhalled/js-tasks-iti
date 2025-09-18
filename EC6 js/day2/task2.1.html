@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createCourse({name = "Default Course", duration = "1 day", owner = "ُEman"} = {}) {
+            const course = {
+                name,
+                duration,
+                owner
+            };
+
+            console.log("Course Information:");
+            console.log("Name:", course.name);
+            console.log("Duration:", course.duration);
+            console.log("Owner:", course.owner);
+        }
+
+        createCourse({ duration: "4",name: "eman", owner: "Eman Khaled"});
+        createCourse({name: "Flutter", duration: "6 days", owner: "Ahmed Ali"});
+        createCourse();
+        createCourse({name: "Python"});
+    </script>
+</body>
+</html>
