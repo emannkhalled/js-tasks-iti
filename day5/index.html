@@ -1,64 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Slider</title>
+  <title>Combined Page</title>
   <style>
     body {
       text-align: center;
-      margin-top: 50px;
+      margin: 50px auto;
       background: #f9f9f9;
+      font-family: Arial, sans-serif;
     }
-    .parent {
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    /* Slider Styles */
+    .slider-parent {
       width: 400px;
       height: 300px;
-      margin: auto;
+      margin: 20px auto;
       border: 5px solid gold;
       border-radius: 10px;
- 
     }
-    .parent img {
+    .slider-parent img {
       width: 100%;
       height: 100%;
-  
     }
-    .buttons {
+    .slider-buttons {
       margin-top: 20px;
     }
-    button {
+    .slider-buttons button {
       padding: 10px 20px;
       font-size: 16px;
       margin: 5px;
       border: 1px solid;
       border-radius: 5px;
       color: white;
+      cursor: pointer;
     }
-    .befor, .after {
-      background: orange;
+    .befor, .after { background: orange; }
+    .play { background: green; }
+    .stop { background: red; }
+
+    /* Traffic Light Styles */
+    .traffic-container {
+      margin: 50px 0;
     }
-    .play {
-      background: green;
+    .c {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 30px;
+      background: grey;
+      border: 2px solid black;
+      transition: background 0.3s;
     }
-    .stop {
-      background: red;
+
+    /* C1&C2 Section */
+    .c1c2-container {
+      margin: 50px 0;
     }
   </style>
 </head>
 <body>
 
-  <h2> Slider</h2>
-  
-  <div class="parent">
-    <img id="photo" src="11.jpg" alt="eror img">
+  <!-- Slider Section -->
+  <h2>Slider</h2>
+  <div class="slider-parent">
+    <img id="photo" src="11.jpg" alt="error img">
   </div>
-
-  <div class="buttons">
+  <div class="slider-buttons">
     <button class="befor" onclick="beforeSlide()">&lt;</button>
     <button class="play" onclick="playSlide()">Play</button>
     <button class="stop" onclick="stopSlide()">Stop</button>
     <button class="after" onclick="afterSlide()">&gt;</button>
   </div>
 
+  <!-- Traffic Light Section -->
+  <h2>Traffic Light</h2>
+  <div class="traffic-container">
+    <div id="c1" class="c"></div>
+    <div id="c2" class="c"></div>
+    <div id="c3" class="c"></div>
+  </div>
+
+  <!-- C1 & C2 Section -->
+  <h2>C1 & C2</h2>
+  <div class="c1c2-container">
+    <script>
+      // ---------- C1 Function ----------
+      function c1func(p1, p2) {
+        try {
+          if (arguments.length !== 2) {
+            throw new Error("Function must accept only 2 parameters.");
+          }
+          if (p1 === null || p2 == null || String(p1) === "" || String(p2) === "" || isNaN(p1) || isNaN(p2)) {
+            throw new Error("Parameters must be numbers.");
+          }
+          var n1 = Number(p1);
+          var n2 = Number(p2);
+          return "Parameters received: " + n1 + " and " + n2;
+        } catch (e) {
+          alert("C1 Error: " + e.message);
+          console.error("C1 Error:", e.message);
+        }
+      }
+
+      // ---------- C2 Function ----------
+      function addNumbers() {
+        if (arguments.length === 0) {
+          throw new Error("Function must be called with at least one parameter.");
+        }
+        var sum = 0;
+        for (var i = 0; i < arguments.length; i++) {
+          var v = arguments[i];
+          if (isNaN(v)) {
+            throw new Error("Parameter must be a valid number.");
+          }
+          sum += Number(v);
+        }
+        return sum;
+      }
+
+      try {
+        var count = prompt("C2: How many numbers to add?");
+        if (count === null || String(count) === "" || isNaN(count)) {
+          throw new Error("Invalid count value.");
+        }
+        count = Number(count);
+        if (count <= 0 || Math.floor(count) !== count) {
+          throw new Error("Count must be a positive integer.");
+        }
+
+        var nums = [];
+        for (var i = 0; i < count; i++) {
+          var val = prompt("Enter number " + (i + 1) + ":");
+          nums.push(val);
+        }
+        var resultC2 = addNumbers.apply(null, nums);
+        alert("C2: The sum is " + resultC2);
+        console.log("C2 Sum Result:", resultC2);
+      } catch (e) {
+        alert("C2 Error: " + e.message);
+        console.error("C2 Error:", e.message);
+      }
+    </script>
+  </div>
+
+  <!-- ---------- Slider Script ---------- -->
   <script>
     var images = [
       "11.jpg",
@@ -67,9 +158,8 @@
       "gettyimages-2223829868-612x612.jpg",
       "images.jpeg"
     ];
-
     var index = 0;
-    var slide = document.getElementById("photo");
+    var photo = document.getElementById("photo");
     var timer;
 
     function showSlide(i) {
@@ -78,28 +168,67 @@
 
     function afterSlide() {
       index++;
-      if (index >= images.length) {
-        index = 0;
-      }
+      if (index >= images.length) index = 0;
       showSlide(index);
     }
 
     function beforeSlide() {
       index--;
-      if (index < 0) {
-        index = images.length - 1;
-      }
+      if (index < 0) index = images.length - 1;
       showSlide(index);
     }
 
     function playSlide() {
-      stopSlide(); 
-      timer = setInterval(afterSlide, 1000); 
+      stopSlide();
+      timer = setInterval(afterSlide, 1000);
     }
 
     function stopSlide() {
       clearInterval(timer);
     }
+  </script>
+
+  <!-- ---------- Traffic Light Script ---------- -->
+  <script>
+    var circles = document.getElementsByClassName("c");
+    var interval;
+
+    function colors() {
+      for (var j = 0; j < circles.length; j++) {
+        circles[j].style.background = "grey";
+      }
+    }
+
+    for (var i = 0; i < circles.length; i++) {
+      (function(index) {
+        circles[index].onmouseenter = function() {
+          clearInterval(interval);
+          colors();
+          if (index === 0) circles[index].style.background = "red";
+          else if (index === 1) circles[index].style.background = "yellow";
+          else if (index === 2) circles[index].style.background = "green";
+        };
+
+        circles[index].onmouseleave = function() {
+          startInterval();
+        };
+      })(i);
+    }
+
+    function startInterval() {
+      var current = 0;
+      clearInterval(interval);
+      interval = setInterval(function() {
+        colors();
+        if (current === 0) circles[0].style.background = "red";
+        else if (current === 1) circles[1].style.background = "yellow";
+        else if (current === 2) circles[2].style.background = "green";
+        current++;
+        if (current > 2) current = 0;
+      }, 1000);
+    }
+
+    startInterval();
   </script>
 
 </body>
